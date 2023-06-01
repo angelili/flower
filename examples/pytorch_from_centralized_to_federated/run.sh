@@ -1,15 +1,16 @@
 #!/bin/bash
 
-echo "Starting server"
-python server.py &
-sleep 3  # Sleep for 3s to give the server enough time to start
+# Declare the client job names
+clients=("client1" "client2" "client3")
 
-for i in `seq 0 1`; do
-    echo "Starting client $i"
-    python client.py &
+# Submit the server job to the "cuda" partition
+srun server.py
+
+# Loop through the client job names and submit each client job to the "cuda" partition
+for client in "${clients[@]}"; do
+    srun --partition=cuda --nodes=1 --ntasks=1 --exclusive   client.py "$client" &
 done
 
-# This will allow you to use CTRL+C to stop all background processes
-trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM
-# Wait for all background processes to complete
+# Wait for all background client jobs to finish
 wait
+
