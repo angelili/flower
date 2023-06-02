@@ -4,7 +4,7 @@
 clients=("client1" "client2" "client3")
 
 # Submit the server job to the "cuda" partition
-srun server.py
+python3 server.py
 
 # Loop through the client job names and submit each client job to the "cuda" partition
 for client in "${clients[@]}"; do
