@@ -8,7 +8,7 @@ python3 server.py
 
 # Loop through the client job names and submit each client job to the "cuda" partition
 for client in "${clients[@]}"; do
-    sbatch client.py &
+    sbatch client.sbatch &
 done
 
 # Wait for all background client jobs to finish
