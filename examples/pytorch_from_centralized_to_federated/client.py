@@ -13,8 +13,14 @@ import torch
 import torchvision
 
 import cifar
-
+fedl_server: "10.30.0.254:9000"
+fedl_no_proxy: True
 USE_FEDBN: bool = True
+
+if gconfig.fedl_no_proxy:
+   import os
+   os.environ["http_proxy"] = ""
+   os.environ["https_proxy"] = ""
 
 # pylint: disable=no-member
 DEVICE: str = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -95,8 +101,8 @@ def main() -> None:
 
     # Start client
     client = CifarClient(model, trainloader, testloader, num_examples)
-    fl.client.start_numpy_client(server_address="10.30.0.8:6379"
-, client=client)
+    fl.client.start_numpy_client(server_address= "10.30.0.254:9000",
+    client=client)
 
 
 if __name__ == "__main__":
