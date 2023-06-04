@@ -13,12 +13,11 @@ import torch
 import torchvision
 
 import cifar
-fedl_server: "10.30.0.254:9000"
-fedl_no_proxy: True
+fedl_server="10.30.0.254:9000"
+fedl_no_proxy=True
 USE_FEDBN: bool = True
 
-if gconfig.fedl_no_proxy:
-   import os
+if fedl_no_proxy:
    os.environ["http_proxy"] = ""
    os.environ["https_proxy"] = ""
 
