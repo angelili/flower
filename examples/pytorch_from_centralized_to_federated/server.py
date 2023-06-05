@@ -1,11 +1,12 @@
 """Flower server example."""
 fedl_server="10.30.0.254:9000"
-fedl_no_proxy=True
+
 import flwr as fl
 
 
 
 if __name__ == "__main__":
+    fedl_no_proxy=True
     if fedl_no_proxy:
       import os
       os.environ["http_proxy"] = ""
