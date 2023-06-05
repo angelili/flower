@@ -100,7 +100,7 @@ def main() -> None:
 
     # Start client
     client = CifarClient(model, trainloader, testloader, num_examples)
-    fl.client.start_numpy_client(server_address= "127.0.0.1:8080",
+    fl.client.start_numpy_client(server_address="10.30.0.254:9000",
     client=client)
 
 
