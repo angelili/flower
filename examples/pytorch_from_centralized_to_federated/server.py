@@ -10,6 +10,6 @@ if fedl_no_proxy:
 
 if __name__ == "__main__":
     fl.server.start_server(
-        server_address= "0.0.0.0:8080",
+        server_address= "10.30.0.254:6817",
         config=fl.server.ServerConfig(num_rounds=3),
     )
