@@ -8,4 +8,4 @@
 #SBATCH --error slurm.%J.err # STDERR
 #SBATCH --export=ALL
 
-python3 client.py
+srun python3 client.py
