@@ -3,6 +3,7 @@
 
 import flwr as fl
 import os
+import cifar
 
 def get_evaluate_fn(
     testset: torchvision.datasets.CIFAR10,
