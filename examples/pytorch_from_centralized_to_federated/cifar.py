@@ -53,18 +53,29 @@ class Net(nn.Module):
         return x
 
 
+
 def load_data() -> (
-    Tuple[torch.utils.data.DataLoader, torch.utils.data.DataLoader, Dict]
-):
+    Tuple[torch.utils.data.DataLoader, torch.utils.data.DataLoader, Dict]):
     """Load CIFAR-10 (training and test set)."""
     transform = transforms.Compose(
-        [transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
+        [transforms.ToTensor(), transforms.Normalize((0.5), (0.5))]
     )
-    trainset = CIFAR10(DATA_ROOT, train=True, download=True, transform=transform)
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=32, shuffle=True)
-    testset = CIFAR10(DATA_ROOT, train=False, download=True, transform=transform)
-    testloader = torch.utils.data.DataLoader(testset, batch_size=32, shuffle=False)
+    trainset = MNIST(DATA_ROOT, train=True, download=True, transform=transform)
+
+    sample_size=500
+    indices = random.sample(range(len(trainset)), sample_size)
+    sampler = torch.utils.data.SubsetRandomSampler(indices)
+
+    trainloader = torch.utils.data.DataLoader(trainset, batch_size=16, shuffle=False, sampler=sampler)
+
+    testset = MNIST(DATA_ROOT, train=False, download=True, transform=transform)
+    sample_size=100
+    indices = random.sample(range(len(testset)), sample_size)
+    sampler = torch.utils.data.SubsetRandomSampler(indices)
+
+    testloader = torch.utils.data.DataLoader(testset, batch_size=16, shuffle=False, sampler=sampler)
     num_examples = {"trainset": len(trainset), "testset": len(testset)}
+    
     return trainloader, testloader, num_examples
 
 
