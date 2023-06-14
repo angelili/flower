@@ -6,7 +6,7 @@ import os
 import cifar
 import torch
 import torchvision
-from typing import Callable, Optional, Tuple, Dict, Scalar
+from typing import Callable, Optional, Tuple, Dict, Union
 
 def get_evaluate_fn(
     testset: torchvision.datasets.MNIST,
@@ -14,7 +14,7 @@ def get_evaluate_fn(
     """Return an evaluation function for centralized evaluation."""
 
     def evaluate(
-        server_round: int, parameters: fl.common.NDArrays, config: Dict[str, Scalar]
+        server_round: int, parameters: fl.common.NDArrays, config: Dict[str, Union[int, float, complex]]
     ) -> Optional[Tuple[float, float]]:
         """Use the entire CIFAR-10 test set for evaluation."""
 
