@@ -19,7 +19,7 @@ import torch.nn.functional as F
 import torchvision
 import torchvision.transforms as transforms
 from torch import Tensor
-from torchvision.datasets import CIFAR10
+from torchvision.datasets import MNIST
 
 DATA_ROOT = "./dataset"
 
