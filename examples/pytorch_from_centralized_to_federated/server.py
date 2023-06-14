@@ -53,7 +53,7 @@ if __name__ == "__main__":
         fraction_evaluate=0.1,
         min_fit_clients=2,
         min_evaluate_clients=2,
-        evaluate_fn=get_evaluate_fn(testloader),  # centralised evaluation of global model
+        evaluate_fn=get_evaluate_fn(testset),  # centralised evaluation of global model
     )
     fl.server.start_server(
         server_address= "10.30.0.254:9000",
