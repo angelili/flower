@@ -41,6 +41,9 @@ if __name__ == "__main__":
       os.environ["http_proxy"] = ""
       os.environ["https_proxy"] = ""
     DATA_ROOT_SERVER = "./server_dataset"
+    transform = transforms.Compose(
+        [transforms.ToTensor(), transforms.Normalize((0.5), (0.5))]
+    )
     testset = MNIST(DATA_ROOT_SERVER, train=False, download=True, transform=transform)
         # configure the strategy
     strategy = fl.server.strategy.FedAvg(
