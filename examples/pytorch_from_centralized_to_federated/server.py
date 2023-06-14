@@ -32,7 +32,7 @@ def get_evaluate_fn(
        
 
         testloader = torch.utils.data.DataLoader(testset, batch_size=50)
-        loss, accuracy = cifar.test(model, testloader, device=DEVICE)
+        loss, accuracy = cifar.test(model, testloader, device=cifar.DEVICE)
 
         # return statistics
         return loss, {"accuracy": accuracy}
