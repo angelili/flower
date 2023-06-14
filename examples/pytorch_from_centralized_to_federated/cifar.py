@@ -31,8 +31,8 @@ import torch
 DATA_ROOT = "./dataset"
 
 
-def load_data() -> 
-    (Tuple[torch.utils.data.DataLoader, torch.utils.data.DataLoader, Dict]):
+def load_data() -> (
+    Tuple[torch.utils.data.DataLoader, torch.utils.data.DataLoader, Dict]):
     """Load CIFAR-10 (training and test set)."""
     transform = transforms.Compose(
         [transforms.ToTensor(), transforms.Normalize((0.5), (0.5))]
