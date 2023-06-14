@@ -32,10 +32,8 @@ def get_evaluate_fn(
     strategy = fl.server.strategy.FedAvg(
         fraction_fit=0.1,
         fraction_evaluate=0.1,
-        min_fit_clients=10,
-        min_evaluate_clients=10,
-        min_available_clients=pool_size,  # All clients should be available
-        on_fit_config_fn=fit_config,
+        min_fit_clients=2,
+        min_evaluate_clients=2,
         evaluate_fn=get_evaluate_fn(testset),  # centralised evaluation of global model
     )
 
