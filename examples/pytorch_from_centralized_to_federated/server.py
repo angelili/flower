@@ -45,12 +45,7 @@ if __name__ == "__main__":
     if fedl_no_proxy:
       os.environ["http_proxy"] = ""
       os.environ["https_proxy"] = ""
-    DATA_ROOT_SERVER = "./server_dataset"
-    transform = transforms.Compose(
-        [transforms.ToTensor(), transforms.Normalize((0.5), (0.5))]
-    )
-    testset = MNIST(DATA_ROOT_SERVER, train=False, download=True, transform=transform)
-        # configure the strategy
+    _, _, testset, _ =cifar.load_data()
     strategy = fl.server.strategy.FedAvg(
         fraction_fit=0.1,
         fraction_evaluate=0.1,
