@@ -10,6 +10,7 @@ from typing import Callable, Optional, Tuple, Dict, Union
 from torchvision.datasets import MNIST
 import torchvision.transforms as transforms
 from torch import Tensor
+import cifar
 
 def get_evaluate_fn(
     testset: torchvision.datasets.MNIST,
@@ -24,9 +25,9 @@ def get_evaluate_fn(
         # determine device
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-        model = Net()
+        model = cifar.Net().to(DEVICE).eval()
         set_params(model, parameters)
-        model.to(device)
+       
 
         testloader = torch.utils.data.DataLoader(testset, batch_size=50)
         loss, accuracy = test(model, testloader, device=device)
