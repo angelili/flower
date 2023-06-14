@@ -6,6 +6,7 @@ import os
 import cifar
 import torch
 import torchvision
+from typing import Callable, Optional, Tuple, Dict
 
 def get_evaluate_fn(
     testset: torchvision.datasets.MNIST,
