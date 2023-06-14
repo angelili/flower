@@ -94,7 +94,7 @@ def main() -> None:
       os.environ["http_proxy"] = ""
       os.environ["https_proxy"] = ""
     # Load data
-    trainloader, testloader, num_examples = cifar.load_data()
+    trainloader, testloader, _, num_examples = cifar.load_data()
 
     # Load model
     model = cifar.Net().to(DEVICE).train()
