@@ -6,7 +6,7 @@ import os
 import cifar
 
 def get_evaluate_fn(
-    testset: torchvision.datasets.CIFAR10,
+    testset: torchvision.datasets.MNIST,
 ) -> Callable[[fl.common.NDArrays], Optional[Tuple[float, float]]]:
     """Return an evaluation function for centralized evaluation."""
 
@@ -29,20 +29,22 @@ def get_evaluate_fn(
         return loss, {"accuracy": accuracy}
 
     return evaluate
-    # configure the strategy
-    strategy = fl.server.strategy.FedAvg(
-        fraction_fit=0.1,
-        fraction_evaluate=0.1,
-        min_fit_clients=2,
-        min_evaluate_clients=2,
-        evaluate_fn=get_evaluate_fn(testset),  # centralised evaluation of global model
-    )
+
 
 if __name__ == "__main__":
     fedl_no_proxy=True
     if fedl_no_proxy:
       os.environ["http_proxy"] = ""
       os.environ["https_proxy"] = ""
+    _, testloader, _= cifar.load_data()
+        # configure the strategy
+    strategy = fl.server.strategy.FedAvg(
+        fraction_fit=0.1,
+        fraction_evaluate=0.1,
+        min_fit_clients=2,
+        min_evaluate_clients=2,
+        evaluate_fn=get_evaluate_fn(testloader),  # centralised evaluation of global model
+    )
     fl.server.start_server(
         server_address= "10.30.0.254:9000",
         config=fl.server.ServerConfig(num_rounds=3),
