@@ -40,7 +40,7 @@ if __name__ == "__main__":
     if fedl_no_proxy:
       os.environ["http_proxy"] = ""
       os.environ["https_proxy"] = ""
-      
+    DATA_ROOT_SERVER = "./server_dataset"
     testset = MNIST(DATA_ROOT_SERVER, train=False, download=True, transform=transform)
         # configure the strategy
     strategy = fl.server.strategy.FedAvg(
