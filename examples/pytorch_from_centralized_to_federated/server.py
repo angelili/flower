@@ -7,6 +7,7 @@ import cifar
 import torch
 import torchvision
 from typing import Callable, Optional, Tuple, Dict, Union
+from torchvision.datasets import MNIST
 
 def get_evaluate_fn(
     testset: torchvision.datasets.MNIST,
@@ -39,7 +40,8 @@ if __name__ == "__main__":
     if fedl_no_proxy:
       os.environ["http_proxy"] = ""
       os.environ["https_proxy"] = ""
-    testset = MNIST(DATA_ROOT, train=False, download=True, transform=transform)
+      
+    testset = MNIST(DATA_ROOT_SERVER, train=False, download=True, transform=transform)
         # configure the strategy
     strategy = fl.server.strategy.FedAvg(
         fraction_fit=0.1,
