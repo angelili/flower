@@ -26,7 +26,7 @@ def get_evaluate_fn(
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
         model = cifar.Net().to(DEVICE).eval()
-        params_dict = zip(.model.state_dict().keys(), parameters)
+        params_dict = zip(model.state_dict().keys(), parameters)
         state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
         model.load_state_dict(state_dict, strict=True)
        
