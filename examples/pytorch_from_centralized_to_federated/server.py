@@ -39,7 +39,7 @@ if __name__ == "__main__":
     if fedl_no_proxy:
       os.environ["http_proxy"] = ""
       os.environ["https_proxy"] = ""
-    _, testloader, _= cifar.load_data()
+    trainloader, testloader, num_examples= cifar.load_data()
         # configure the strategy
     strategy = fl.server.strategy.FedAvg(
         fraction_fit=0.1,
