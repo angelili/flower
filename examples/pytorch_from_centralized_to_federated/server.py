@@ -8,6 +8,8 @@ import torch
 import torchvision
 from typing import Callable, Optional, Tuple, Dict, Union
 from torchvision.datasets import MNIST
+import torchvision.transforms as transforms
+from torch import Tensor
 
 def get_evaluate_fn(
     testset: torchvision.datasets.MNIST,
