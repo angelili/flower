@@ -21,6 +21,7 @@ import torchvision.transforms as transforms
 from torch import Tensor
 from torchvision.datasets import MNIST
 import random
+import data_utils
 
 DATA_ROOT = "./dataset"
 
