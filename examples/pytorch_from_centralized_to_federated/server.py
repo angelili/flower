@@ -26,7 +26,7 @@ def get_evaluate_fn(
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
         model = cifar.Net().to(DEVICE).eval()
-        set_params(model, parameters)
+        set_parameters(model, )
        
 
         testloader = torch.utils.data.DataLoader(testset, batch_size=50)
