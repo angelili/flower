@@ -24,11 +24,13 @@ def get_evaluate_fn(
 
         # determine device
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
-        model = cifar.Net().to(device).eval()
-        params_dict = zip(model.state_dict().keys(), parameters)
-        state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
-        model.load_state_dict(state_dict, strict=False)
+          """Set model weights from a list of NumPy ndarrays."""
+        model = cifar.Net()
+        params_dict = zip(model.state_dict().keys(), params)
+        state_dict = OrderedDict({k: torch.from_numpy(np.copy(v)) for k, v in params_dict})
+        model.load_state_dict(state_dict, strict=True)
+        model.to(device)
+       
        
 
         testloader = torch.utils.data.DataLoader(testset, batch_size=50)
