@@ -15,7 +15,7 @@ import torchvision
 import cifar
 
 
-USE_FEDBN: bool = True
+USE_FEDBN: bool = False
 
 
 
