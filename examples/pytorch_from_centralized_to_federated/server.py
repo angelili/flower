@@ -2,11 +2,12 @@
 
 from collections import OrderedDict
 import flwr as fl
+from flwr.common import Metrics
 import os
 import numpy as np
 import torch
 import torchvision
-from typing import Callable, Optional, Tuple, Dict, Union, List, Metrics
+from typing import Callable, Optional, Tuple, Dict, Union, List
 from torchvision.datasets import MNIST
 import torchvision.transforms as transforms
 from torch import Tensor
