@@ -3,7 +3,7 @@
 from collections import OrderedDict
 import flwr as fl
 import os
-
+import numpy as np
 import torch
 import torchvision
 from typing import Callable, Optional, Tuple, Dict, Union
