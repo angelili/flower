@@ -39,7 +39,13 @@ def get_evaluate_fn(
         return loss, {"accuracy": accuracy}
 
     return evaluate
+def weighted_average(metrics: List[Tuple[int, Metrics]]) -> Metrics:
+    # Multiply accuracy of each client by number of examples used
+    accuracies = [num_examples * m["accuracy"] for num_examples, m in metrics]
+    examples = [num_examples for num_examples, _ in metrics]
 
+    # Aggregate and return custom metric (weighted average)
+    return {"accuracy": sum(accuracies) / sum(examples)}
 
 if __name__ == "__main__":
     fedl_no_proxy=True
@@ -52,7 +58,8 @@ if __name__ == "__main__":
         fraction_evaluate=0.1,
         min_fit_clients=2,
         min_evaluate_clients=2,
-        evaluate_fn=get_evaluate_fn(testset),  # centralised evaluation of global model
+        evaluate_fn=get_evaluate_fn(testset),  #centralised evaluation of global model
+        evaluate_metrics_aggregation_fn=weighted_average
     )
     fl.server.start_server(
         server_address= "10.30.0.254:9000",
