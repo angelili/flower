@@ -12,7 +12,7 @@ import numpy as np
 import torch
 import torchvision
 
-import cifar
+import mnist
 
 
 USE_FEDBN: bool = False
