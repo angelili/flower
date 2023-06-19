@@ -7,8 +7,6 @@ https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html
 """
 
 
-# mypy: ignore-errors
-# pylint: disable=W0223
 
 
 from typing import Tuple, Dict
