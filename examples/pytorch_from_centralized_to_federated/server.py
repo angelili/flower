@@ -11,7 +11,7 @@ from typing import Callable, Optional, Tuple, Dict, Union, List
 from torchvision.datasets import MNIST
 import torchvision.transforms as transforms
 from torch import Tensor
-import cifar
+import mnist
 
 def get_evaluate_fn(
     testset: torchvision.datasets.MNIST,
@@ -25,7 +25,7 @@ def get_evaluate_fn(
 
         # determine device
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        model = cifar.Net()
+        model = mnist.Net()
         params_dict = zip(model.state_dict().keys(), parameters)
         state_dict = OrderedDict({k: torch.from_numpy(np.copy(v)) for k, v in params_dict})
         model.load_state_dict(state_dict, strict=True)
@@ -53,12 +53,12 @@ if __name__ == "__main__":
     if fedl_no_proxy:
       os.environ["http_proxy"] = ""
       os.environ["https_proxy"] = ""
-    _, _, testset, _ =cifar.load_data()
+    _, _, testset, _ = mnist.load_data()
     strategy = fl.server.strategy.FedAvg(
         fraction_fit=0.1,
         fraction_evaluate=0.1,
-        min_fit_clients=2,
-        min_evaluate_clients=2,
+        min_fit_clients=5,
+        min_evaluate_clients=5,
         evaluate_fn=get_evaluate_fn(testset),  #centralised evaluation of global model
         evaluate_metrics_aggregation_fn=weighted_average
     )
